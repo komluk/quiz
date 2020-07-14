@@ -5,18 +5,8 @@ $(document).ready(function () {
             <h2>Sign Up</h2>
             <form id='sign_up_form'>
                 <div class="form-group">
-                    <label for="firstname">Firstname</label>
-                    <input type="text" class="form-control" name="firstname" id="firstname" required />
-                </div>
- 
-                <div class="form-group">
-                    <label for="lastname">Lastname</label>
-                    <input type="text" class="form-control" name="lastname" id="lastname" required />
-                </div>
- 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required />
+                    <label for="name">Login</label>
+                    <input type="text" class="form-control" name="name" id="name" required />
                 </div>
  
                 <div class="form-group">
@@ -38,6 +28,7 @@ $(document).ready(function () {
     var sign_up_form = $(this);
     var form_data = JSON.stringify(sign_up_form.serializeObject());
 
+    console.log(form_data);
     // submit form data to api
     $.ajax({
       url: "api/create_user.php",
@@ -45,6 +36,7 @@ $(document).ready(function () {
       contentType: "application/json",
       data: form_data,
       success: function (result) {
+          console.log(result);
         // if response is a success, tell the user it was a successful sign up & empty the input boxes
         $("#response").html(
           "<div class='alert alert-success'>Successful sign up. Please login.</div>"
