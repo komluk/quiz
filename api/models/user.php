@@ -14,11 +14,9 @@ class User{
     }
  
     function create(){
-    
-        // insert query
+        
         $query = "INSERT INTO " . $this->table_name . "SET name = :name, password = :password";
     
-        // prepare the query
         $stmt = $this->conn->prepare($query);
     
         // sanitize
@@ -42,7 +40,6 @@ class User{
 
     function userExists(){
      
-        // query to check if user exists
         $query = "SELECT id, name, password FROM " . $this->table_name . " WHERE name = ? LIMIT 0,1";
      
         // prepare the query
@@ -60,7 +57,6 @@ class User{
         // get number of rows
         $num = $stmt->rowCount();
      
-        // if name exists, assign values to object properties for easy access and use for php sessions
         if($num>0){
      
             // get record details / values
