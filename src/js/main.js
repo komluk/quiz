@@ -36,7 +36,7 @@ $(document).ready(function () {
       contentType: "application/json",
       data: form_data,
       success: function (result) {
-          console.log(result);
+        console.log(result);
         // if response is a success, tell the user it was a successful sign up & empty the input boxes
         $("#response").html(
           "<div class='alert alert-success'>Successful sign up. Please login.</div>"
@@ -61,6 +61,48 @@ $(document).ready(function () {
   }
 
   // showLoginPage() will be here
+  $(document).on("click", "#login", function () {
+    showLoginPage();
+  });
+
+  function showLoginPage() {
+    setCookie("jwt", "", 1);
+
+    var html = `
+    <h2>Login</h2>
+      <form id='login_form'>
+          <div class='form-group'>
+              <label for='name'>Login</label>
+              <input type='name' class='form-control' id='name' name='name' placeholder='Enter name'>
+          </div>
+
+          <div class='form-group'>
+              <label for='password'>Password</label>
+              <input type='password' class='form-control' id='password' name='password' placeholder='Password'>
+          </div>
+
+          <button type='submit' class='btn btn-primary'>Login</button>
+      </form>
+    `;
+    $("#content").html(html);
+    
+    clearResponse();
+    showLoggedOutMenu();
+  }
+
+  function setCookie(name, value, exp) {
+    var d = new Date();
+    d.setTime(d.getTime() + exp * 24 * 60 * 60 * 1000);
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+  }
+
+  function showLoggedOutMenu(){
+    $("#login, #sign_up").show();
+    $("#logout").hide();    
+  }
+
+  // showHomePage() function will be here
 
   // function to make form values to json format
   $.fn.serializeObject = function () {
