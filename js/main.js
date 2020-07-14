@@ -53,8 +53,6 @@ $(document).ready(function () {
     return false;
   });
 
-  // show login form trigger will be here
-
   // remove any prompt messages
   function clearResponse() {
     $("#response").html("");
