@@ -13,14 +13,10 @@ class User{
         $this->conn = $db;
     }
  
-    // create new user record
     function create(){
     
         // insert query
-        $query = "INSERT INTO " . $this->table_name . "
-                SET
-                    name = :name,
-                    password = :password";
+        $query = "INSERT INTO " . $this->table_name . "SET name = :name, password = :password";
     
         // prepare the query
         $stmt = $this->conn->prepare($query);
@@ -44,14 +40,10 @@ class User{
         return false;
     }
 
-    // check if given user exist in the database
     function userExists(){
      
         // query to check if user exists
-        $query = "SELECT id, name, password
-                FROM " . $this->table_name . "
-                WHERE name = ?
-                LIMIT 0,1";
+        $query = "SELECT id, name, password FROM " . $this->table_name . " WHERE name = ? LIMIT 0,1";
      
         // prepare the query
         $stmt = $this->conn->prepare( $query );
@@ -78,12 +70,9 @@ class User{
             $this->id = $row['id'];
             $this->name = $row['name'];
             $this->password = $row['password'];
-     
-            // return true because name exists in the database
+                 
             return true;
         }
-     
-        // return false if name does not exist in the database
         return false;
     }
 }

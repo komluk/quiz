@@ -24,10 +24,8 @@ $data = json_decode(file_get_contents("php://input"));
 $user->name = $data->name;
 $user->password = $data->password;
  
-// create the user
 if(
-    !empty($user->firstname) &&
-    !empty($user->email) &&
+    !empty($user->name) &&
     !empty($user->password) &&
     $user->create()
 ){
@@ -37,8 +35,6 @@ if(
     // display message: user was created
     echo json_encode(array("message" => "User was created."));
 }
- 
-// message if unable to create user
 else{
  
     // set response code
