@@ -2,16 +2,16 @@ $(document).ready(function () {
   // show sign up / registration form
   $(document).on("click", "#sign_up", function () {
     var html = `
-            <h2>Sign Up</h2>
+            <h2>Registration</h2>
             <form id='sign_up_form'>
                 <div class="form-group">
                     <label for="name">Login</label>
-                    <input type="text" class="form-control" name="name" id="name" required />
+                    <input type="text" class="form-control" name="name" id="name" placeholder='Enter name' required/>
                 </div>
  
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" required />
+                    <input type="password" class="form-control" name="password" id="password" placeholder='Password' required />
                 </div>
  
                 <button type='submit' class='btn btn-primary'>Sign Up</button>
@@ -53,8 +53,6 @@ $(document).ready(function () {
     return false;
   });
 
-  // show login form trigger will be here
-
   // remove any prompt messages
   function clearResponse() {
     $("#response").html("");
@@ -65,6 +63,95 @@ $(document).ready(function () {
     showLoginPage();
   });
 
+  $(document).on("submit", "#login_form", function () {
+    // get form data
+    var login_form = $(this);
+    var form_data = JSON.stringify(login_form.serializeObject());
+
+    $.ajax({
+      url: "api/login.php",
+      type: "POST",
+      contentType: "application/json",
+      data: form_data,
+      success: function (result) {
+        // store jwt to cookie
+        setCookie("jwt", result.jwt, 1);
+
+        // show home page & tell the user it was a successful login
+        showHomePage();
+        $("#response").html(
+          "<div class='alert alert-success'>Successful login.</div>"
+        );
+      },
+      error: function (xhr, resp, text) {
+        // on error, tell the user login has failed & empty the input boxes
+        $("#response").html(
+          "<div class='alert alert-danger'>Login failed. Email or password is incorrect.</div>"
+        );
+        login_form.find("input").val("");
+      },
+    });
+    return false;
+  });
+
+  // show home page
+  $(document).on("click", "#home", function () {
+    showHomePage();
+    clearResponse();
+  });
+
+  // show home page
+  function showHomePage() {
+    // validate jwt to verify access
+    var jwt = getCookie("jwt");
+    $.post("api/validate_token.php", JSON.stringify({ jwt: jwt }))
+      .done(function (result) {
+        // if valid, show homepage
+        var html = `
+          <div class="card">
+              <div class="card-header">Welcome to Home!</div>
+              <div class="card-body">
+                  <h5 class="card-title">You are logged in.</h5>
+                  <p class="card-text">You won't be able to access the home and account pages if you are not logged in.</p>
+              </div>
+          </div>
+          `;
+
+        $("#content").html(html);
+        showLoggedInMenu();
+      })
+      .fail(function (result) {
+        showLoginPage();
+        $("#response").html(
+          "<div class='alert alert-danger'>Please login to access the home page.</div>"
+        );
+      });
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  // if the user is logged in
+  function showLoggedInMenu() {
+    // hide login and sign up from navbar & show logout button
+    $("#login, #sign_up").hide();
+    $("#logout").show();
+  }
+
   function showLoginPage() {
     setCookie("jwt", "", 1);
 
@@ -73,7 +160,7 @@ $(document).ready(function () {
       <form id='login_form'>
           <div class='form-group'>
               <label for='name'>Login</label>
-              <input type='name' class='form-control' id='name' name='name' placeholder='Enter name'>
+              <input type='text' class='form-control' id='name' name='name' placeholder='Enter name'>
           </div>
 
           <div class='form-group'>
@@ -85,7 +172,7 @@ $(document).ready(function () {
       </form>
     `;
     $("#content").html(html);
-    
+
     clearResponse();
     showLoggedOutMenu();
   }
@@ -97,12 +184,18 @@ $(document).ready(function () {
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
   }
 
-  function showLoggedOutMenu(){
+  function showLoggedOutMenu() {
     $("#login, #sign_up").show();
-    $("#logout").hide();    
+    $("#logout").hide();
   }
 
-  // showHomePage() function will be here
+  // logout the user
+  $(document).on("click", "#logout", function () {
+    showLoginPage();
+    $("#response").html(
+      "<div class='alert alert-info'>You are logged out.</div>"
+    );
+  });
 
   // function to make form values to json format
   $.fn.serializeObject = function () {
