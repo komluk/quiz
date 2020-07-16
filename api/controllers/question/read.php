@@ -1,14 +1,17 @@
 <?php
 include_once '../../config/headers.php';
+include_once '../../config/core.php';
 include_once '../../config/database.php';
 include_once '../../models/question.php';
  
 $database = new Database();
 $db = $database->getConnection();
   
+$id = isset($_GET['id']) ? $_GET['id'] : 1;
+
 $question = new question($db);
-  
-$stmt = $question->read();
+
+$stmt = $question->read($id);
 $num = $stmt->rowCount();
   
 if($num>0){
@@ -28,9 +31,9 @@ if($num>0){
     }
 
     $total_rows=$question->count();
-    $page_url="{$home_url}question/paging.php?";
+    $page_url="{$home_url}api/controllers/question/read.php?";
     $paging=$question->getPaging($page, $total_rows, 1, $page_url);
-    // $question_arr["paging"]=$paging;
+    $question_arr["paging"]=$paging;
   
     http_response_code(200);
     echo json_encode($question_arr);

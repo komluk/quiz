@@ -12,17 +12,17 @@ class Question extends ModelBase{
     }
 
 
-    function read(){
+    function read($id){
 
-        $query = "SELECT id, value FROM " . $this->table_name . " ORDER BY id";
+        $query = "SELECT id, value FROM " . $this->table_name . "  WHERE id= " . $id . "";
   
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
   
         return $stmt;        
     }
-
-    public function count(){
+    
+    function count(){
         
         $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name . "";
       

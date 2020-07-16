@@ -6,11 +6,11 @@ include_once '../../models/answer.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$question = isset($_GET['question']) ? $_GET['question'] : 1;
+$qid = isset($_GET['qid']) ? $_GET['qid'] : 1;
 
 $answer  = new Answer($db);
 
-$stmt = $answer->read($question);
+$stmt = $answer->read($qid);
 $num = $stmt->rowCount();
 
 if($num>0){
