@@ -72,17 +72,13 @@ $(document).ready(function () {
       contentType: "application/json",
       data: form_data,
       success: function (result) {
-        // store jwt to cookie
         setCookie("jwt", result.jwt, 1);
-
-        // show home page & tell the user it was a successful login
         showHomePage();
         $("#response").html(
           "<div class='alert alert-success'>Successful login.</div>"
         );
       },
       error: function (xhr, resp, text) {
-        // on error, tell the user login has failed & empty the input boxes
         $("#response").html(
           "<div class='alert alert-danger'>Login failed. Email or password is incorrect.</div>"
         );
@@ -93,27 +89,28 @@ $(document).ready(function () {
   });
 
   // show home page
-  $(document).on("click", "#home", function () {
+  $(document).on("click", "#quiz", function () {
     showHomePage();
     clearResponse();
   });
 
   // show home page
   function showHomePage() {
-    // validate jwt to verify access
     var jwt = getCookie("jwt");
+
     $.post("api/controllers/token/validate.php", JSON.stringify({ jwt: jwt }))
       .done(function (result) {
-        // if valid, show homepage
+        console.log(result);
+
         var html = `
-          <div class="card">
-              <div class="card-header">Welcome to Home!</div>
-              <div class="card-body">
-                  <h5 class="card-title">You are logged in.</h5>
-                  <p class="card-text">You won't be able to access the home and account pages if you are not logged in.</p>
-              </div>
-          </div>
-          `;
+            <div class="card">
+                <div class="card-header">Welcome to Quiz!</div>
+                <div class="card-body">
+                    <h5 class="card-title">You are logged in.</h5>
+                    <p class="card-text">You won't be able to access the quiz if you are not logged in.</p>
+                </div>
+            </div>
+            `;
 
         $("#content").html(html);
         showLoggedInMenu();
@@ -121,7 +118,7 @@ $(document).ready(function () {
       .fail(function (result) {
         showLoginPage();
         $("#response").html(
-          "<div class='alert alert-danger'>Please login to access the home page.</div>"
+          "<div class='alert alert-danger'>Please login to access the quiz page.</div>"
         );
       });
   }
