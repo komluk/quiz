@@ -1,5 +1,5 @@
 <?php
-include_once '../../config/headers.php' 
+include_once '../../config/headers.php';
 include_once '../../config/database.php';
 include_once '../../models/question.php';
  
@@ -32,6 +32,6 @@ if($num>0){
 }  
 else{
     http_response_code(404);
-    echo json_encode(array("message" => "No categories found."));
+    echo json_encode(array("message" => "No questions found."));
 }
 ?>
