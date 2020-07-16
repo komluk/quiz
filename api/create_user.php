@@ -23,8 +23,6 @@ $data = json_decode(file_get_contents("php://input"));
 // set user property values
 $user->name = $data->name;
 $user->password = $data->password;
-
-echo($user);
  
 if(
     !empty($user->name) &&

@@ -1,16 +1,14 @@
 <?php
+include_once 'model_base.php';
 
-class User{
-    
-    private $conn;
-    private $table_name = "users";
+class User extends ModelBase{
 
-    public $id;
     public $name;
     public $password;
      
     public function __construct($db){
         $this->conn = $db;
+        $this->table_name = "users";
     }
  
     function create(){

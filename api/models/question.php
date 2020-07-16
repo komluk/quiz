@@ -1,13 +1,17 @@
 <?php
+include_once 'model_base.php';
 
-class Question{
+class Question extends ModelBase{
     private $conn;
-    private $table_name = "questions";
+    private 
 
     public $id;
+    public $value;
+
 
     public function __constructor($db){
         $this->conn = $db;
+        $this->table_name = "questions";
     }
 
 
