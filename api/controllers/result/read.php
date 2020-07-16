@@ -10,7 +10,7 @@ $uid = isset($_GET['uid']) ? $_GET['uid'] : 1;
 
 $result  = new Result($db);
 
-$stmt = $result->read($qid);
+$stmt = $result->read($uid);
 $num = $stmt->rowCount();
 
 if($num>0){
