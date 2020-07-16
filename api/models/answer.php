@@ -11,5 +11,14 @@ class Answer extends ModelBase{
         $this->conn = $db;
         $this->table_name = "answers";
     }
+
+    function read($question){
+
+        $query = "SELECT id, value, question_id FROM " . $this->table_name . " WHERE question_id=" . $question . " ORDER BY id";  
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+  
+        return $stmt;        
+    }
 }
 ?>

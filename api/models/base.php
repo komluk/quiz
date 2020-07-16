@@ -5,6 +5,5 @@ class ModelBase{
     protected $table_name;
 
     public $id;
-    public $created;
 }
 ?>
