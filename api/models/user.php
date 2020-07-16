@@ -1,5 +1,5 @@
 <?php
-include_once 'model_base.php';
+require_once 'model_base.php';
 
 class User extends ModelBase{
 
@@ -13,7 +13,7 @@ class User extends ModelBase{
  
     function create(){
         
-        $query = "INSERT INTO " . $this->table_name . "SET name = :name, password = :password";
+        $query = "INSERT INTO " . $this->table_name . " SET name = :name, password = :password";
     
         $stmt = $this->conn->prepare($query);
     

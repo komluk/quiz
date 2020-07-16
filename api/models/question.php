@@ -1,11 +1,8 @@
 <?php
-include_once 'model_base.php';
+require_once 'model_base.php';
 
 class Question extends ModelBase{
-    private $conn;
-    private 
 
-    public $id;
     public $value;
 
 
