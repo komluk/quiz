@@ -1,5 +1,5 @@
 <?php
-include_once 'model_base.php';
+require_once 'model_base.php';
 
 class Answer extends ModelBase{
 
