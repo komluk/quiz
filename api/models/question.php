@@ -6,7 +6,7 @@ class Question extends ModelBase{
     public $value;
 
 
-    public function __constructor($db){
+    public function __construct($db){
         $this->conn = $db;
         $this->table_name = "questions";
     }

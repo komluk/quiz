@@ -28,7 +28,6 @@ $(document).ready(function () {
     var sign_up_form = $(this);
     var form_data = JSON.stringify(sign_up_form.serializeObject());
 
-    console.log(form_data);
     // submit form data to api
     $.ajax({
       url: "api/controllers/user/create.php",
@@ -36,7 +35,6 @@ $(document).ready(function () {
       contentType: "application/json",
       data: form_data,
       success: function (result) {
-        console.log(result);
         // if response is a success, tell the user it was a successful sign up & empty the input boxes
         $("#response").html(
           "<div class='alert alert-success'>Successful sign up. Please login.</div>"
