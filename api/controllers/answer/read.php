@@ -34,51 +34,6 @@ if($num>0){
     echo json_encode($answer_arr);
 }else{  
     http_response_code(404);
-    echo json_encode(array("message" => "No products found."));
+    echo json_encode(array("message" => "No questions found."));
 }
-
-
-// function read(){
-  
-//     $query = "SELECT
-//                 c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-//             FROM
-//                 " . $this->table_name . " p
-//                 LEFT JOIN
-//                     categories c
-//                         ON p.category_id = c.id
-//             ORDER BY
-//                 p.created DESC";
-  
-//     $stmt = $this->conn->prepare($query);
-//     $stmt->execute(); 
-    
-//     return $stmt;
-// }
-
-// function readOne(){
-
-//     $query = "SELECT
-//                 c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-//             FROM
-//                 " . $this->table_name . " p
-//                 LEFT JOIN
-//                     categories c
-//                         ON p.category_id = c.id
-//             WHERE
-//                 p.id = ?
-//             LIMIT
-//                 0,1";
-
-//     $stmt = $this->conn->prepare( $query );
-//     $stmt->bindParam(1, $this->id);
-//     $stmt->execute();
-  
-//     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-//     $this->value = $row['answer'];
-//     $this->correct = $row['correct'];
-//     $this->question = $row['question'];
-//     $this->question_id = $row['question_id'];                  
-// }
 ?>
