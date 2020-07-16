@@ -1,5 +1,5 @@
 <?php
-require_once 'model_base.php';
+require_once 'base.php';
 
 class Question extends ModelBase{
 
@@ -12,8 +12,19 @@ class Question extends ModelBase{
     }
 
 
-    function getQuestions(){
-        
+    function read(){
+
+        $query = "SELECT
+                    id, value
+                FROM
+                    " . $this->table_name . "
+                ORDER BY
+                    id";
+  
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+  
+        return $stmt;        
     }
 }
 ?>

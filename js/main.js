@@ -31,7 +31,7 @@ $(document).ready(function () {
     console.log(form_data);
     // submit form data to api
     $.ajax({
-      url: "api/create_user.php",
+      url: "api/controllers/user/create.php",
       type: "POST",
       contentType: "application/json",
       data: form_data,
@@ -69,7 +69,7 @@ $(document).ready(function () {
     var form_data = JSON.stringify(login_form.serializeObject());
 
     $.ajax({
-      url: "api/login.php",
+      url: "api/controllers/user/login.php",
       type: "POST",
       contentType: "application/json",
       data: form_data,
@@ -104,7 +104,7 @@ $(document).ready(function () {
   function showHomePage() {
     // validate jwt to verify access
     var jwt = getCookie("jwt");
-    $.post("api/validate_token.php", JSON.stringify({ jwt: jwt }))
+    $.post("api/controllers/token/validate.php", JSON.stringify({ jwt: jwt }))
       .done(function (result) {
         // if valid, show homepage
         var html = `
