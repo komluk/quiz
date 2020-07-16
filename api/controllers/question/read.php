@@ -26,6 +26,11 @@ if($num>0){
   
         array_push($question_arr["records"], $question_item);
     }
+
+    $total_rows=$question->count();
+    $page_url="{$home_url}question/paging.php?";
+    $paging=$question->getPaging($page, $total_rows, 1, $page_url);
+    // $question_arr["paging"]=$paging;
   
     http_response_code(200);
     echo json_encode($question_arr);
