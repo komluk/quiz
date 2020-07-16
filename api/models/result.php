@@ -35,23 +35,24 @@ class Result extends ModelBase{
         }else{
             return false;
         }
-  
     }
 
-    function get($user_id){
+    function read($uid){
 
         $query = "SELECT 
-        u.name as 'user', 
-        q.value as 'question', 
-        a.value as 'answer',
-        a.correct
-        FROM `results` r 
-        LEFT JOIN users u on r.user_id = u.id 
-        LEFT JOIN questions q on r.question_id =q.id 
-        LEFT JOIN answers a on r.answer_id = a.id 
-        WHERE user_id= " . $user_id ."";
+            u.name as 'user', 
+            q.value as 'question', 
+            a.value as 'answer',
+            a.correct
+                FROM `results` r 
+            LEFT JOIN users u on r.user_id = u.id 
+            LEFT JOIN questions q on r.question_id =q.id 
+            LEFT JOIN answers a on r.answer_id = a.id 
+                WHERE user_id= " . $uid ."";
 
-        return false;
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        return $stmt;
     }
 }
 ?>
