@@ -10,19 +10,14 @@
   <body>
     <div class="container">
       <div id="end" class="flex-center flex-column">
-        <h1 id="finalScore"></h1>
         <form>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="username"
-          />
+          <h1 id="username"></h1>
+          <h2 id="finalScore"></h2>
           <button
             type="submit"
             class="btn"
             id="saveScoreBtn"
-            onclick="saveHighScore(event)"
+            onclick="save(event)"
             disabled
           >
             Save

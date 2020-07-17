@@ -6,17 +6,17 @@ include_once '../../models/answer.php';
 $database = new Database();
 $db = $database->getConnection();
 
-$qid = isset($_GET['qid']) ? $_GET['qid'] : 1;
+$qid = isset($_GET['qid']) ? $_GET['qid'] : 0;
 
 $answer  = new Answer($db);
 
 $stmt = $answer->read($qid);
 $num = $stmt->rowCount();
 
-if($num>0){
+if($qid>0 && $num>0){
   
     $answer_arr=array();
-    $answer_arr["records"]=array();
+    $answer_arr["data"]=array();
   
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
@@ -25,11 +25,10 @@ if($num>0){
         $answer_item=array(
             "id" => $id,
             "value" => $value,
-            "question_id" => $question_id,
-            "correct" => $correct
+            "correct" => $correct == 1 ? true : false
         );
   
-        array_push($answer_arr["records"], $answer_item);
+        array_push($answer_arr["data"], $answer_item);
     }
     http_response_code(200);
     echo json_encode($answer_arr);

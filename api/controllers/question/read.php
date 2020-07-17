@@ -7,40 +7,54 @@ include_once '../../models/question.php';
 $database = new Database();
 $db = $database->getConnection();
   
-$id = isset($_GET['id']) ? $_GET['id'] : 1;
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
 
 $question = new question($db);
+$question_arr=array();
+$question_arr["data"]=array();
 
-$stmt = $question->read($id);
-$num = $stmt->rowCount();
-  
-if($num>0){
-  
-    $question_arr=array();
-    $question_arr["records"]=array();
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-
-        extract($row);  
-        $question_item=array(
-            "id" => $id,
-            "value" => $value
-        );
-  
-        array_push($question_arr["records"], $question_item);
+if($id>0){
+    $stmt = $question->read($id);
+    $num = $stmt->rowCount();
+      
+    if($num>0){        
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    
+            extract($row);  
+            $question_item=array(
+                "id" => $id,
+                "value" => $value
+            );      
+            array_push($question_arr["data"], $question_item);
+        }
+        $total_rows=$question->count();
+        $question_arr["total"]=$total_rows;
+      
+        http_response_code(200);
+        echo json_encode($question_arr);
+    }  
+    else{
+        http_response_code(404);
+        echo json_encode(array("message" => "No questions found."));
     }
-
-    $total_rows=$question->count();
-    $page_url="{$home_url}api/controllers/question/read.php?";
-    $paging=$question->getPaging($page, $total_rows, 1, $page_url);
-    $question_arr["total"]=$total_rows;
-    $question_arr["paging"]=$paging;
-  
-    http_response_code(200);
-    echo json_encode($question_arr);
-}  
-else{
-    http_response_code(404);
-    echo json_encode(array("message" => "No questions found."));
+}else{
+    $stmt = $question->all();
+    $num = $stmt->rowCount();
+    if($num>0){    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){    
+            extract($row);  
+            $question_item=array(
+                "id" => $id,
+                "value" => $value
+            );    
+            array_push($question_arr["data"], $question_item);
+        }      
+        http_response_code(200);
+        echo json_encode($question_arr);
+    }
+    else{
+        http_response_code(404);
+        echo json_encode(array("message" => "No questions found."));   
+    }
 }
 ?>
