@@ -1,8 +1,11 @@
-const highScoresList = document.getElementById("highScoresList");
-const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+const user = JSON.parse(localStorage.getItem("user")) || {};
+
+fetch = () => {
+  
+};
 
 highScoresList.innerHTML = highScores
-  .map(score => {
+  .map((score) => {
     return `<li class="high-score">${score.name} - ${score.score}</li>`;
   })
   .join("");

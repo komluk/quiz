@@ -6,6 +6,7 @@ class Answer extends ModelBase{
     public $question_id;
     public $value;    
     public $correct;
+    public $points;
 
     public function __construct($db){
         $this->conn = $db;
@@ -14,7 +15,7 @@ class Answer extends ModelBase{
 
     function read($qid){
 
-        $query = "SELECT id, value, question_id, correct FROM " . $this->table_name . " WHERE question_id=" . $qid . " ORDER BY id";  
+        $query = "SELECT id, value, question_id, correct, points FROM " . $this->table_name . " WHERE question_id=" . $qid . " ORDER BY id";  
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
   

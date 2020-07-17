@@ -1,6 +1,5 @@
 //CONSTANTS
 const CORRECT_BONUS = 10;
-
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
@@ -8,9 +7,10 @@ const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById("loader");
 const quiz = document.getElementById("quiz");
+
 let currentQuestion = {};
 let acceptingAnswers = false;
-let MAX_QUESTIONS = 3;
+let MAX_QUESTIONS = 0;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
@@ -40,7 +40,7 @@ let startGame = async () => {
   score = 0;
   availableQuestions = [...questions];
   MAX_QUESTIONS = availableQuestions.length;
-  await getNewQuestion();
+  await getNextQuestion();
 
   quiz.classList.remove("hidden");
   loader.classList.add("hidden");
@@ -59,9 +59,9 @@ let getAnswers = async (qid) => {
   });
 };
 
-getNewQuestion = async () => {
+getNextQuestion = async () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-    // localStorage.setItem("mostRecentScore", score);
+    localStorage.setItem("mostRecentScore", score);
     return window.location.assign("/quiz/finish.html");
   }
   questionCounter++;
@@ -96,24 +96,28 @@ choices.forEach((choice) => {
     console.log("selected: ", selectedAnswer);
 
     const classToApply =
-      (selectedAnswer == currentQuestion.answers[idx]) == "1"
-        ? "correct"
-        : "incorrect";
+      currentQuestion.answers[idx].correct == true ? "correct" : "incorrect";
 
     if (classToApply === "correct") {
-      incrementScore(CORRECT_BONUS);
+      incrementScore();
+      saveResult();
     }
+    
 
     selectedChoice.parentElement.classList.add(classToApply);
 
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
-      getNewQuestion();
+      getNextQuestion();
     }, 1000);
   });
 });
 
-incrementScore = (num) => {
-  score += num;
+saveResult = () => {
+
+};
+
+incrementScore = () => {
+  score += CORRECT_BONUS;
   scoreText.innerText = score;
 };
