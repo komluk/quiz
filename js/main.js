@@ -19,7 +19,7 @@ score = async (e) => {
 logout = (e) => {
   e.preventDefault();
   localStorage.clear();
-  token = {};
+  token = "";
   window.location.assign("/quiz/login.html");
 };
 
