@@ -19,24 +19,6 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `quiz_db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `answers`
---
-
-CREATE TABLE `answers` (
-  `id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `value` varchar(250) NOT NULL,
-  `correct` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `answers`
---
 
 INSERT INTO `answers` (`id`, `question_id`, `value`, `correct`) VALUES
 (1, 1, '$DOMAIN', 0),
@@ -160,22 +142,6 @@ INSERT INTO `answers` (`id`, `question_id`, `value`, `correct`) VALUES
 (119, 30, 'href', 1),
 (120, 30, 'newref', 0),
 
--- --------------------------------------------------------
-
---
--- Table structure for table `questions`
---
-
-CREATE TABLE `questions` (
-  `id` int(11) NOT NULL,
-  `value` text NOT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `questions`
---
-
 INSERT INTO `questions` (`id`, `value`, `created`) VALUES
 (1, 'W jakiej zmiennej zapisywany jest adres IP użytkownika?', '2020-07-16 11:50:58'),
 (2, 'Jak utworzyć tablice PHP w formacie HTML <form>?', '2020-07-16 11:50:58'),
@@ -208,41 +174,6 @@ INSERT INTO `questions` (`id`, `value`, `created`) VALUES
 (29, 'Która z poniższych metod może być użyta do zamknięcia bazy danych MySql za pomocą PHP?', '2020-07-16 11:50:58');
 (30, 'Który z poniższych atrybutów jest wykorzystywany do dodania linku do dowolnego elementu?', '2020-07-16 11:50:58');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `results`
---
-
-CREATE TABLE `results` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `question_id` int(11) NOT NULL,
-  `answer_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `results`
---
-
-INSERT INTO `results` (`id`, `user_id`, `question_id`, `answer_id`) VALUES
-(1, 3, 1, 1),
-(2, 3, 2, 1),
-(3, 3, 3, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(265) NOT NULL,
-  `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `password` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Dumping data for table `users`
 --
@@ -253,64 +184,3 @@ INSERT INTO `users` (`id`, `name`, `created`, `password`) VALUES
 (8, 'user2', '2020-07-16 12:16:24', '$2y$10$I1JkVHGgPlaEu2fVb3BNEevQd1gOI1uDYj3GF7OA5r1uNNjStbI6m'),
 (9, 'user3', '2020-07-16 12:55:18', '$2y$10$iGQUkleSm3sx32j/GXLytutE60A/y8IB0nYjZTw0XhTUDnEatcKiK'),
 (10, 'user4', '2020-07-16 14:01:10', '$2y$10$/d7A.upPurhgc2TtuWKZv.YvqLyFmy5s96lqcS6sgHxWI2srbpBOy');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `answers`
---
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `results`
---
-ALTER TABLE `results`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `answers`
---
-ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `results`
---
-ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
