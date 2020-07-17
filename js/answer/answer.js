@@ -1,3 +1,7 @@
 $(document).ready(function () {
-    showProducts();
+    showAnswers();
+});
+
+$(document).on('click', '.read-answers-button', function(){
+    showAnswers();
 });
