@@ -1,29 +1,41 @@
-const token = JSON.parse(localStorage.getItem("token"));
+let token = JSON.parse(localStorage.getItem("token")) || "";
 
-start = (e) => {
+window.onload = function () {
+  if (!token || token == "") {
+    window.location.assign("/quiz/login.html");
+  }
+};
+
+start = async (e) => {
   e.preventDefault();
+  await validate("/quiz/quiz.html");
+};
 
-  if (token) {
-    fetch("api/controllers/token/validate.php", {
+score = async (e) => {
+  e.preventDefault();
+  await validate("/quiz/score.html");
+};
+
+logout = (e) => {
+  e.preventDefault();
+  localStorage.clear();
+  token = {};
+  window.location.assign("/quiz/login.html");
+};
+
+let validate = async (url) => {
+  if (token && token != "") {
+    let response = await fetch("api/controllers/token/validate.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ jwt: token }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("success:", data);
-
-        localStorage.setItem("token", JSON.stringify(token));
-        localStorage.setItem("user", JSON.stringify(data.data));
-
-        window.location.assign("/quiz/quiz.html");
-      })
-      .catch((error) => {
-        window.location.assign("/quiz/login.html");
-        console.log("Error:", error);
-      });
+    });
+    let result = await response.json();
+    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("user", JSON.stringify(result.data));
+    window.location.assign(url);
   } else {
     window.location.assign("/quiz/login.html");
   }

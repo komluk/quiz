@@ -1,5 +1,3 @@
-//CONSTANTS
-const CORRECT_BONUS = 10;
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
@@ -7,38 +5,49 @@ const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById("loader");
 const quiz = document.getElementById("quiz");
-const user = JSON.parse(localStorage.getItem("user")) || {};
+
+let user = JSON.parse(localStorage.getItem("user")) || {};
+let token = JSON.parse(localStorage.getItem("token")) || "";
 
 let currentQuestion = {};
 let acceptingAnswers = false;
-let MAX_QUESTIONS = 0;
+let total = 0;
 let score = 0;
-let questionCounter = 0;
+let counter = 0;
 let questions = [];
 
-fetch("api/controllers/question/read.php")
-  .then((result) => {
-    return result.json();
-  })
-  .then((response) => {
-    questions = response.data.map((q) => {
-      let question = {
-        id: q.id,
-        question: q.value,
-        answers: [],
-      };
-      return question;
-    });
-    startGame();
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+window.onload = function () {
+  if (!token || token == "") {
+    window.location.assign("/quiz/login.html");
+  }
+  else init();
+};
 
-let startGame = async () => {
-  questionCounter = 0;
+let init = () => {
+  fetch("api/controllers/question/read.php")
+    .then((result) => {
+      return result.json();
+    })
+    .then((response) => {
+      questions = response.data.map((q) => {
+        let question = {
+          id: q.id,
+          question: q.value,
+          answers: [],
+        };
+        return question;
+      });
+      start();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+let start = async () => {
+  counter = 0;
   score = 0;
-  MAX_QUESTIONS = questions.length;
+  total = questions.length;
   await getNextQuestion();
 
   quiz.classList.remove("hidden");
@@ -60,13 +69,13 @@ let getAnswers = async (qid) => {
 };
 
 getNextQuestion = async () => {
-  if (questions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+  if (questions.length === 0 || counter >= total) {
     localStorage.setItem("score", score);
     return window.location.assign("/quiz/finish.html");
   }
-  questionCounter++;
-  progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
-  progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+  counter++;
+  progressText.innerText = `Question ${counter}/${total}`;
+  progressBarFull.style.width = `${(counter / total) * 100}%`;
 
   const questionIndex = Math.floor(Math.random() * questions.length);
   currentQuestion = questions[questionIndex];

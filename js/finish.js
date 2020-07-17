@@ -1,12 +1,19 @@
 const username = document.getElementById("username");
 const saveScoreBtn = document.getElementById("saveScoreBtn");
 const finalScore = document.getElementById("score");
-
 const recentScore = localStorage.getItem("score");
-const user = JSON.parse(localStorage.getItem("user")) || {};
+
+let user = JSON.parse(localStorage.getItem("user")) || {};
+let token = JSON.parse(localStorage.getItem("token")) || "";
 
 finalScore.innerText += recentScore;
 username.innerText += user.name;
+
+window.onload = function () {
+  if (!token || token == "") {
+    window.location.assign("/quiz/login.html");
+  }
+};
 
 save = (e) => {
   e.preventDefault();

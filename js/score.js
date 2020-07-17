@@ -1,25 +1,28 @@
-const user = JSON.parse(localStorage.getItem("user")) || {};
+const userScores = document.getElementById("scores");
+
+let user = JSON.parse(localStorage.getItem("user")) || {};
+let token = JSON.parse(localStorage.getItem("token")) || "";
 let scores = [];
 
-fetch("api/controllers/score/read.php?uid=" + user.id)
-  .then((result) => {
-    return result.json();
-  })
-  .then((response) => {
-    scores = response.data.map((s) => {
-      let score = {
-        uid: s.user_id,
-        score: s.score,
-      };
-      return score;
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+window.onload = function () {
+  if (!token || token == "") {
+    window.location.assign("/quiz/login.html");
+  } else init();
+};
 
-highScoresList.innerHTML = scores
-  .map((score) => {
-    return `<li class="high-score">${user.name} - ${score.score}</li>`;
-  })
-  .join("");
+let init = () => {
+  fetch("api/controllers/score/read.php?uid=" + user.id)
+    .then((result) => {
+      return result.json();
+    })
+    .then((response) => {
+      userScores.innerHTML = response.data
+        .map((s) => {
+          return `<li class="high-score">${user.name} - ${s.score}</li>`;
+        })
+        .join("");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
