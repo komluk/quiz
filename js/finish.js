@@ -3,27 +3,27 @@ const saveScoreBtn = document.getElementById("saveScoreBtn");
 const finalScore = document.getElementById("score");
 
 const recentScore = localStorage.getItem("score");
-// const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 const user = JSON.parse(localStorage.getItem("user")) || {};
 
 finalScore.innerText += recentScore;
 username.innerText += user.name;
 
-// username.addEventListener('keyup', () => {
-//     saveScoreBtn.disabled = !username.value;
-// });
-
 save = (e) => {
   e.preventDefault();
 
-//   const score = {
-//     score: recentScore,
-//     name: user.name,
-//   };
-//   highScores.push(score);
-//   highScores.sort((a, b) => b.score - a.score);
-//   highScores.splice(5);
-
-//   localStorage.setItem("highScores", JSON.stringify(highScores));
+  fetch("api/controllers/score/create.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ user: user.id, score: recentScore }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("success:", data);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
   window.location.assign("/quiz");
 };

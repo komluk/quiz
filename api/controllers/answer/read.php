@@ -26,7 +26,7 @@ if($qid>0 && $num>0){
             "id" => $id,
             "value" => $value,
             "correct" => $correct == 1 ? true : false,
-            "points" => $points
+            "points" => (int)$points
         );
   
         array_push($answer_arr["data"], $answer_item);
