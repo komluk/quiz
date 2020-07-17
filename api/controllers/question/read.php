@@ -33,6 +33,7 @@ if($num>0){
     $total_rows=$question->count();
     $page_url="{$home_url}api/controllers/question/read.php?";
     $paging=$question->getPaging($page, $total_rows, 1, $page_url);
+    $question_arr["total"]=$total_rows;
     $question_arr["paging"]=$paging;
   
     http_response_code(200);

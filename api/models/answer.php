@@ -12,9 +12,9 @@ class Answer extends ModelBase{
         $this->table_name = "answers";
     }
 
-    function read($question){
+    function read($qid){
 
-        $query = "SELECT id, value, question_id FROM " . $this->table_name . " WHERE question_id=" . $question . " ORDER BY id";  
+        $query = "SELECT id, value, question_id, correct FROM " . $this->table_name . " WHERE question_id=" . $qid . " ORDER BY id";  
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
   

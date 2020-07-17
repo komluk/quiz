@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Quiz app</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="login" class="flex-center flex-column">
+        <h1>Login</h1>
+        <form id="loginForm">
+          <input type="text" name="name" id="name" placeholder="Username" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+          <button
+            type="submit"
+            class="btn"
+            id="loginBtn"
+            onclick="login(event)"
+            disabled
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+    <script src="js/login.js"></script>
+  </body>
+</html>

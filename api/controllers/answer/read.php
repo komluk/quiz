@@ -25,7 +25,8 @@ if($num>0){
         $answer_item=array(
             "id" => $id,
             "value" => $value,
-            "question_id" => $question_id
+            "question_id" => $question_id,
+            "correct" => $correct
         );
   
         array_push($answer_arr["records"], $answer_item);
@@ -34,6 +35,6 @@ if($num>0){
     echo json_encode($answer_arr);
 }else{  
     http_response_code(404);
-    echo json_encode(array("message" => "No questions found."));
+    echo json_encode(array("message" => "No answers found."));
 }
 ?>
