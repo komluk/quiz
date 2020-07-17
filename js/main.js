@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // show sign up / registration form
   $(document).on("click", "#sign_up", function () {
     var html = `
             <h2>Registration</h2>
@@ -35,14 +34,12 @@ $(document).ready(function () {
       contentType: "application/json",
       data: form_data,
       success: function (result) {
-        // if response is a success, tell the user it was a successful sign up & empty the input boxes
         $("#response").html(
           "<div class='alert alert-success'>Successful sign up. Please login.</div>"
         );
         sign_up_form.find("input").val("");
       },
       error: function (xhr, resp, text) {
-        // on error, tell the user sign up failed
         $("#response").html(
           "<div class='alert alert-danger'>Unable to sign up. Please contact admin.</div>"
         );
@@ -98,29 +95,51 @@ $(document).ready(function () {
   function showHomePage() {
     var jwt = getCookie("jwt");
 
-    $.post("api/controllers/token/validate.php", JSON.stringify({ jwt: jwt }))
-      .done(function (result) {
-        console.log(result);
+    // $.post("api/controllers/token/validate.php", JSON.stringify({ jwt: jwt }))
+    //   .done(function (result) {
+    //     console.log(result);
 
-        var html = `
-            <div class="card">
-                <div class="card-header">Welcome to Quiz!</div>
-                <div class="card-body">
-                    <h5 class="card-title">You are logged in.</h5>
-                    <p class="card-text">You won't be able to access the quiz if you are not logged in.</p>
-                </div>
-            </div>
-            `;
+    //     var html = `
+    //         <div class="card">
+    //             <div class="card-header">Welcome to Quiz!</div>
+    //             <div class="card-body">
+    //                 <h5 class="card-title">You are logged in.</h5>
+    //                 <p class="card-text">You won't be able to access the quiz if you are not logged in.</p>
+    //             </div>
+    //         </div>
+    //         `;
 
-        $("#content").html(html);
-        showLoggedInMenu();
-      })
-      .fail(function (result) {
-        showLoginPage();
-        $("#response").html(
-          "<div class='alert alert-danger'>Please login to access the quiz page.</div>"
-        );
-      });
+    //     $("#content").html(html);
+    //     showLoggedInMenu();
+    //     showQuestions(result.data);
+    //   })
+    //   .fail(function (result) {
+    //     showLoginPage();
+    //     $("#response").html(
+    //       "<div class='alert alert-danger'>Please login to access the quiz page.</div>"
+    //     );
+    //   });
+  }
+
+  function showQuestions(user) {
+    $.getJSON("api/controllers/question/read.php", function (data) {
+      console.log({ user, data });
+      // var read_questions_html = `
+      //     <table class='table table-bordered table-hover'>
+      //     <!-- creating our table heading -->
+      //     <tr>
+      //         <th class='w-25-pct'>Name</th>
+      //         <th class='w-10-pct'>Price</th>
+      //         <th class='w-15-pct'>Category</th>
+      //         <th class='w-25-pct text-align-center'>Action</th>
+      //     </tr>`;
+
+      // $.each(data.records, function (key, val) {
+      //   read_questions_html += ``;
+      // });
+
+      // read_questions_html += `</table>`;
+    });
   }
 
   function getCookie(cname) {

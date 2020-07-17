@@ -12,48 +12,69 @@
 
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
   </head>
   <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="#" id="quiz">Quiz</a>
-          <a class="nav-item nav-link" href="#" id="logout">Logout</a>
-          <a class="nav-item nav-link" href="#" id="login">Login</a>
-          <a class="nav-item nav-link" href="#" id="sign_up">Registration</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" id="quiz"
+                >Quiz
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="sign_up">Registration</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
-    <!-- /navbar -->
 
-    <main role="main" class="container starter-template">
+    <div class="container">
+      <h1 class="mt-4">Start Bootstrap</h1>
       <div class="row">
         <div class="col">
-          <!-- where prompt / messages will appear -->
-          <div id="response"></div>
-
-          <!-- where main content will appear -->
-          <div id="content"></div>
+          <p>Quiz on Important Facts</p>
         </div>
+        <!-- <div id="response"></div>
+        <div id="content"></div>
+
+
+        <div class="quiz-container">
+          <div id="quiz"></div>
+        </div>
+        <button id="next">Next Question</button>
+        <button id="submit">Submit Quiz</button>
+        <div id="results"></div> -->
       </div>
-    </main>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
       crossorigin="anonymous"
-    ></script>
-    <script
+    ></script> -->
+    <!-- <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <script src="js/main.js"></script>
+    <!-- <script src="js/quiz.js"></script> -->
   </body>
 </html>
