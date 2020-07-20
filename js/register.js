@@ -27,5 +27,5 @@ register = (e) => {
     .catch((error) => {
       console.log("Error:", error);
     });
-  window.location.assign("/quiz/login.html");
+  window.location.assign("/quiz/login");
 };

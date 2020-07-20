@@ -11,9 +11,9 @@
   </head>
   <body>
     <div class="container">
-      <div id="register" class="flex-center flex-column">
-        <h1>Register</h1>
-        <form id="registerForm">
+      <div id="login" class="flex-center flex-column">
+        <h1>Login</h1>
+        <form id="loginForm">
           <input type="text" name="name" id="name" placeholder="Username" />
           <input
             type="password"
@@ -24,15 +24,19 @@
           <button
             type="submit"
             class="btn"
-            id="registerBtn"
-            onclick="register(event)"
+            id="loginBtn"
+            onclick="login(event)"
             disabled
           >
-            Create account
+            Login
           </button>
         </form>
+        <h4 style="color: green;">
+          Don't have account? Register
+          <a href="/quiz/register"> here</a>
+        </h4>
       </div>
     </div>
-    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>

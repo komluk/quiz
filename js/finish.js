@@ -11,7 +11,7 @@ username.innerText += user.name;
 
 window.onload = function () {
   if (!token || token == "") {
-    window.location.assign("/quiz/login.html");
+    window.location.assign("/quiz/login");
   }
 };
 

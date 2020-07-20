@@ -18,7 +18,7 @@ let questions = [];
 
 window.onload = function () {
   if (!token || token == "") {
-    window.location.assign("/quiz/login.html");
+    window.location.assign("/quiz/login");
   }
   else init();
 };
@@ -71,7 +71,7 @@ let getAnswers = async (qid) => {
 getNextQuestion = async () => {
   if (questions.length === 0 || counter >= total) {
     localStorage.setItem("score", score);
-    return window.location.assign("/quiz/finish.html");
+    return window.location.assign("/quiz/finish");
   }
   counter++;
   progressText.innerText = `Question ${counter}/${total}`;

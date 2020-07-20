@@ -2,25 +2,25 @@ let token = JSON.parse(localStorage.getItem("token")) || "";
 
 window.onload = function () {
   if (!token || token == "") {
-    window.location.assign("/quiz/login.html");
+    window.location.assign("/quiz/login");
   }
 };
 
 start = async (e) => {
   e.preventDefault();
-  await validate("/quiz/quiz.html");
+  await validate("/quiz/start");
 };
 
 score = async (e) => {
   e.preventDefault();
-  await validate("/quiz/score.html");
+  await validate("/quiz/score");
 };
 
 logout = (e) => {
   e.preventDefault();
   localStorage.clear();
   token = "";
-  window.location.assign("/quiz/login.html");
+  window.location.assign("/quiz/login");
 };
 
 let validate = async (url) => {
@@ -37,6 +37,6 @@ let validate = async (url) => {
     localStorage.setItem("user", JSON.stringify(result.data));
     window.location.assign(url);
   } else {
-    window.location.assign("/quiz/login.html");
+    window.location.assign("/quiz/login");
   }
 };
