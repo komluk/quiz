@@ -10,13 +10,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `quiz_db`
 
@@ -36,7 +29,7 @@ INSERT INTO `answers` (`id`, `question_id`, `value`, `correct`, `points`) VALUES
 (13, 4, '// skomentowany kod do końca linii', 0,0),
 (14, 4, '/* skomentowany kod tutaj */', 0,0),
 (15, 4, '#  kod z komentarzem do końca wiersza', 0,0),
-(16, 4, 'Wszystkie powyzsze', 1,10),
+(16, 4, 'wszystkie powyższe', 1,10),
 (17, 5, 'Porównuje klucze tablicowe i zwraca wynik', 0,0),
 (18, 5, 'Sprawdza, czy określony klucz istnieje w tablicy', 0,0),
 (19, 5, 'Zwraca wszystkie klucze tablicy', 1,10),
@@ -93,10 +86,10 @@ INSERT INTO `answers` (`id`, `question_id`, `value`, `correct`, `points`) VALUES
 (70, 18, 'CSS', 0,0),
 (71, 18, 'XML', 0,0),
 (72, 18, 'Java Script', 1,10),
-(73, 19, '#000000;', 1,10),
-(74, 19, '#0000000;', 0,0),
-(75, 19, '#00000000;', 0,0),
-(76, 19, '#000000000;', 0,0),
+(73, 19, '#000000,', 1,10),
+(74, 19, '#0000000,', 0,0),
+(75, 19, '#00000000,', 0,0),
+(76, 19, '#000000000,', 0,0),
 (77, 20, 'Użycie atrybutu zmiany rozmiaru', 0,0),
 (78, 20, 'Wykorzystanie wysokości i szerokości', 1,10),
 (79, 20, 'Użycie atrybutu rozmiaru', 0,0),
@@ -109,18 +102,18 @@ INSERT INTO `answers` (`id`, `question_id`, `value`, `correct`, `points`) VALUES
 (86, 22, 'dwóch sesji', 0,0),
 (87, 22, 'trzech sesji', 0,0),
 (88, 22, 'wielu sesji', 0,0),
-(89, 23, 'border[round]: 30px;', 0,0),
-(90, 23, 'corner-effect: round;', 0,0),
-(91, 23, 'border-radius: 30px; ', 1,10),
-(92, 23, 'alpha-effect: round-corner;', 0,0),
-(93, 24, 'background-size: 80px 60px; ', 1,10),
-(94, 24, 'background-proportion: 80px 60px;', 0,0),
-(95, 24, 'alpha-effect: bg-resize 80px 60px;', 0,0),
+(89, 23, 'border[round]: 30px,', 0,0),
+(90, 23, 'corner-effect: round,', 0,0),
+(91, 23, 'border-radius: 30px, ', 1,10),
+(92, 23, 'alpha-effect: round-corner,', 0,0),
+(93, 24, 'background-size: 80px 60px, ', 1,10),
+(94, 24, 'background-proportion: 80px 60px,', 0,0),
+(95, 24, 'alpha-effect: bg-resize 80px 60px,', 0,0),
 (96, 24, 'Żaden z powyższych', 0,0),
-(97, 25, 'h2 {font-size:200%;}', 0,0),
-(98, 25, 'h2 {font-size:200px;}', 0,0),
+(97, 25, 'h2 {font-size:200%,}', 0,0),
+(98, 25, 'h2 {font-size:200px,}', 0,0),
 (99, 25, 'Obydwa a i b', 1,10),
-(100, 25, 'h2 {font-size:200;}', 0,0),
+(100, 25, 'h2 {font-size:200,}', 0,0),
 (101, 26, 'Dwa', 1,10),
 (102, 26, 'Trzy', 0,0),
 (103, 26, 'Cztery', 0,0),

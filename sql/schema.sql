@@ -33,7 +33,7 @@ CREATE TABLE `answers` (
   `value` varchar(250) NOT NULL,
   `correct` tinyint(1) NOT NULL,
   `points` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `answers`
@@ -46,9 +46,9 @@ CREATE TABLE `answers` (
 
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL,
-  `value` text NOT NULL,
+  `value` mediumtext NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -61,7 +61,7 @@ CREATE TABLE `results` (
   `user_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
   `answer_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -73,19 +73,18 @@ CREATE TABLE `scores` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `score` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
-
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(265) NOT NULL,
+  `name` varchar(265) CHARACTER SET latin1 NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
-  `password` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` varchar(256) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -154,8 +153,13 @@ ALTER TABLE `scores`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-COMMIT;
 
+ALTER TABLE `answers` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `questions` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `results` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `scores` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE `users` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

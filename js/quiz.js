@@ -2,6 +2,7 @@ const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
+const displayText = document.getElementById("time");
 const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById("loader");
 const quiz = document.getElementById("quiz");
@@ -14,13 +15,13 @@ let acceptingAnswers = false;
 let total = 0;
 let score = 0;
 let counter = 0;
+let duration = 0;
 let questions = [];
 
 window.onload = function () {
-  if (!token || token == "" || token=="undefined") {
+  if (!token || token == "" || token == "undefined") {
     window.location.assign("/quiz/login");
-  }
-  else init();
+  } else init();
 };
 
 let init = () => {
@@ -47,11 +48,33 @@ let init = () => {
 let start = async () => {
   counter = 0;
   score = 0;
+  duration = 60 * 30;
   total = questions.length;
   await getNextQuestion();
+  startTimer(duration, displayText);
 
   quiz.classList.remove("hidden");
   loader.classList.add("hidden");
+};
+
+let startTimer = (duration, display) => {
+  var timer = duration, minutes, seconds;
+  setInterval(function () {
+      minutes = parseInt(timer / 60, 10)
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.innerText = minutes + ":" + seconds;
+
+      if (--timer < 0) {
+          timer = duration;
+      } else if (timer == 0){
+        localStorage.setItem("score", score);
+        window.location.assign("/quiz/finish");
+      }
+  }, 1000);
 };
 
 let getAnswers = async (qid) => {
