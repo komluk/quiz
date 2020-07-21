@@ -173,14 +173,3 @@ INSERT INTO `questions` (`id`, `value`, `created`) VALUES
 (28, 'Która z poniższych metod klasy Exception zwraca nazwę pliku źródłowego?', '2020-07-16 11:50:58');
 (29, 'Która z poniższych metod może być użyta do zamknięcia bazy danych MySql za pomocą PHP?', '2020-07-16 11:50:58');
 (30, 'Który z poniższych atrybutów jest wykorzystywany do dodania linku do dowolnego elementu?', '2020-07-16 11:50:58');
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `created`, `password`) VALUES
-(3, 'Lukasz', '2020-07-14 15:21:45', '$2y$10$MyQ9qr6OQ9vJS7Q.sPHvDu9.b/nmq9.qvBuFac20gh5W5eDjLnDnm'),
-(7, 'Lukasz123', '2020-07-14 18:29:26', '$2y$10$tMvopsqCmrOG/zamzVLoyeSaY1pX098G.Y9foe1aN0Ox8urpTM5XK'),
-(8, 'user2', '2020-07-16 12:16:24', '$2y$10$I1JkVHGgPlaEu2fVb3BNEevQd1gOI1uDYj3GF7OA5r1uNNjStbI6m'),
-(9, 'user3', '2020-07-16 12:55:18', '$2y$10$iGQUkleSm3sx32j/GXLytutE60A/y8IB0nYjZTw0XhTUDnEatcKiK'),
-(10, 'user4', '2020-07-16 14:01:10', '$2y$10$/d7A.upPurhgc2TtuWKZv.YvqLyFmy5s96lqcS6sgHxWI2srbpBOy');
