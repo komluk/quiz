@@ -1,7 +1,7 @@
 const username = document.getElementById("name");
 const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
-const loginMsg = document.getElementById("loginMsg")
+const loginMsg = document.getElementById("loginMsg");
 
 username.addEventListener("keyup", () => {
   loginBtn.disabled = !username.value || !password.value;

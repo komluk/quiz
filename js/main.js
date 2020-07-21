@@ -1,7 +1,7 @@
 let token = JSON.parse(localStorage.getItem("token")) || "";
 
 window.onload = function () {
-  if (!token || token == "" || token=="undefined") {
+  if (!token || token == "" || token == "undefined") {
     window.location.assign("/quiz/login");
   }
 };

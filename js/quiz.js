@@ -17,10 +17,9 @@ let counter = 0;
 let questions = [];
 
 window.onload = function () {
-  if (!token || token == "" || token=="undefined") {
+  if (!token || token == "" || token == "undefined") {
     window.location.assign("/quiz/login");
-  }
-  else init();
+  } else init();
 };
 
 let init = () => {
