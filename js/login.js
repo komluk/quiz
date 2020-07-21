@@ -1,6 +1,7 @@
 const username = document.getElementById("name");
 const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginBtn");
+const loginMsg = document.getElementById("loginMsg")
 
 username.addEventListener("keyup", () => {
   loginBtn.disabled = !username.value || !password.value;
@@ -22,9 +23,12 @@ login = (e) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("success:", data);
-      localStorage.setItem("token", JSON.stringify(data.jwt));
-      window.location.assign("/quiz");
+      if (data.message) {
+        loginMsg.innerHTML = data.message;
+      } else {
+        localStorage.setItem("token", JSON.stringify(data.jwt));
+        window.location.assign("/quiz");
+      }
     })
     .catch((error) => {
       console.log("Error:", error);

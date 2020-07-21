@@ -5,7 +5,7 @@ let token = JSON.parse(localStorage.getItem("token")) || "";
 let scores = [];
 
 window.onload = function () {
-  if (!token || token == "") {
+  if (!token || token == "" || token=="undefined") {
     window.location.assign("/quiz/login");
   } else init();
 };

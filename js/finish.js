@@ -10,7 +10,7 @@ finalScore.innerText += recentScore;
 username.innerText += user.name;
 
 window.onload = function () {
-  if (!token || token == "") {
+  if (!token || token == "" || token=="undefined") {
     window.location.assign("/quiz/login");
   }
 };
