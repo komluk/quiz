@@ -23,7 +23,7 @@ login = (e) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.message) {
+      if (!data.jwt) {
         loginMsg.innerHTML = data.message;
       } else {
         localStorage.setItem("token", JSON.stringify(data.jwt));
